@@ -81,7 +81,7 @@ public class SignUpPanel extends ModernPanel {
         gbc.gridx = 0;
         add(userTypeLabel, gbc);
 
-        userTypeCombo = new JComboBox<>(new String[] { "Student", "Faculty", "Staff" });
+        userTypeCombo = new JComboBox<>(new String[] { "Student", "Faculty", "Alumni" });
         userTypeCombo.setFont(ModernTheme.FONT_REGULAR);
         userTypeCombo.setBackground(ModernTheme.INPUT_BG);
         userTypeCombo.setForeground(ModernTheme.TEXT_LIGHT);
