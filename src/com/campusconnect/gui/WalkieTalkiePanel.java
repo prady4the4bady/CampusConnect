@@ -23,7 +23,7 @@ public class WalkieTalkiePanel extends ModernPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Sidebar: Channels
+        
         JPanel sidebar = new ModernPanel(new BorderLayout(10, 10));
         sidebar.setPreferredSize(new Dimension(250, 0));
         sidebar.setBorder(BorderFactory.createCompoundBorder(
@@ -54,7 +54,7 @@ public class WalkieTalkiePanel extends ModernPanel {
 
         add(sidebar, BorderLayout.WEST);
 
-        // Main Area: Walkie Talkie
+        
         JPanel mainArea = new ModernPanel(new GridBagLayout());
         mainArea.setBorder(BorderFactory.createLineBorder(ModernTheme.BORDER, 1));
 
@@ -68,7 +68,7 @@ public class WalkieTalkiePanel extends ModernPanel {
         statusLabel.setForeground(ModernTheme.TEXT_LIGHT);
         mainArea.add(statusLabel, gbc);
 
-        // Visualizer (Simulated)
+        
         visualizerPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -90,12 +90,12 @@ public class WalkieTalkiePanel extends ModernPanel {
         gbc.gridy++;
         mainArea.add(visualizerPanel, gbc);
 
-        // PTT Button
+        
         talkButton = new ModernButton("HOLD TO TALK");
         talkButton.setPreferredSize(new Dimension(220, 220));
         talkButton.setFont(new Font("Segoe UI", Font.BOLD, 24));
         talkButton.setEnabled(false);
-        // Custom styling for PTT button
+        
         talkButton.setBackground(ModernTheme.BG_DARK);
         talkButton.setForeground(Color.GRAY);
 
@@ -129,7 +129,7 @@ public class WalkieTalkiePanel extends ModernPanel {
 
         add(mainArea, BorderLayout.CENTER);
 
-        // Timer for animation
+        
         visualizerTimer = new Timer(50, e -> visualizerPanel.repaint());
 
         refresh();

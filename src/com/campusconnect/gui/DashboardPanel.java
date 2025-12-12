@@ -23,7 +23,7 @@ public class DashboardPanel extends ModernPanel {
         this.mainFrame = mainFrame;
         setLayout(new BorderLayout());
 
-        // Header
+        
         JPanel headerPanel = new ModernPanel(new BorderLayout());
         headerPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
@@ -40,49 +40,49 @@ public class DashboardPanel extends ModernPanel {
         headerPanel.add(logoutButton, BorderLayout.EAST);
         add(headerPanel, BorderLayout.NORTH);
 
-        // Tabs
+        
         JTabbedPane tabbedPane = new JTabbedPane();
         ModernTheme.styleModernTabs(tabbedPane);
 
-        // Feed Tab (NEW - Social Media Feed)
+        
         feedPanel = new FeedPanel();
         tabbedPane.addTab("🏠 Feed", feedPanel);
 
-        // Explore Tab (NEW - User Discovery)
+        
         explorePanel = new ExplorePanel();
         tabbedPane.addTab("🔍 Explore", explorePanel);
 
-        // Notifications Tab (NEW)
+        
         notificationsPanel = new NotificationsPanel();
         tabbedPane.addTab("🔔 Alerts", notificationsPanel);
 
-        // Discover Tab - NEW Enhanced Version with Stats
+        
         discoverHomePanel = new DiscoverHomePanel();
         tabbedPane.addTab("✨ Discover", discoverHomePanel);
 
-        // Groups Tab
+        
         groupsPanel = new GroupsPanel();
         tabbedPane.addTab("Groups", groupsPanel);
 
-        // Events Tab
+        
         eventsPanel = new EventsPanel();
         tabbedPane.addTab("Events", eventsPanel);
 
-        // Chat Tab
+        
         chatPanel = new ChatPanel();
         tabbedPane.addTab("Chat", chatPanel);
 
-        // Walkie-Talkie Tab
+        
         walkieTalkiePanel = new WalkieTalkiePanel();
         tabbedPane.addTab("Walkie-Talkie", walkieTalkiePanel);
 
-        // Profile Tab
+        
         profilePanel = new ProfilePanel();
         tabbedPane.addTab("Profile", profilePanel);
 
         add(tabbedPane, BorderLayout.CENTER);
 
-        // Add change listener to refresh tabs when selected
+        
         tabbedPane.addChangeListener(e -> refresh());
 
         refresh();
@@ -93,7 +93,7 @@ public class DashboardPanel extends ModernPanel {
         if (user != null) {
             welcomeLabel.setText("Welcome, " + user.getName() + " (" + user.getUserType() + ")");
 
-            // Refresh all panels
+            
             if (feedPanel != null)
                 feedPanel.refresh();
             if (explorePanel != null)

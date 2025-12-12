@@ -15,7 +15,7 @@ public class GroupsPanel extends ModernPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Header
+        
         JPanel headerPanel = new JPanel(new BorderLayout());
         headerPanel.setOpaque(false);
 
@@ -30,7 +30,7 @@ public class GroupsPanel extends ModernPanel {
 
         add(headerPanel, BorderLayout.NORTH);
 
-        // Groups List
+        
         groupsContainer = new JPanel();
         groupsContainer.setLayout(new BoxLayout(groupsContainer, BoxLayout.Y_AXIS));
         groupsContainer.setOpaque(false);
@@ -73,7 +73,7 @@ public class GroupsPanel extends ModernPanel {
                 new EmptyBorder(15, 15, 15, 15)));
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 120));
 
-        // Info
+        
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setOpaque(false);
@@ -95,7 +95,7 @@ public class GroupsPanel extends ModernPanel {
 
         card.add(infoPanel, BorderLayout.CENTER);
 
-        // Action Buttons
+        
         User currentUser = DataManager.getInstance().getCurrentUser();
         if (currentUser != null) {
             JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -105,14 +105,14 @@ public class GroupsPanel extends ModernPanel {
             boolean isCouncil = g.isCouncil(currentUser.getId());
             boolean isFaculty = g.isFacultyIncharge(currentUser.getId());
 
-            // Faculty manages council
+            
             if (isFaculty) {
                 ModernButton manageCouncilBtn = new ModernButton("Manage Council");
                 manageCouncilBtn.addActionListener(e -> showCouncilManagement(g));
                 buttonPanel.add(manageCouncilBtn);
             }
 
-            // Council approves requests
+            
             if (isCouncil || isFaculty) {
                 int pendingCount = DataManager.getInstance().getPendingRequestsForGroup(g.getId()).size();
                 ModernButton requestsBtn = new ModernButton("Requests (" + pendingCount + ")");
@@ -120,7 +120,7 @@ public class GroupsPanel extends ModernPanel {
                 buttonPanel.add(requestsBtn);
             }
 
-            // Join/Request button
+            
             if (isMember) {
                 ModernButton joinedBtn = new ModernButton("Joined");
                 joinedBtn.setEnabled(false);
@@ -143,7 +143,7 @@ public class GroupsPanel extends ModernPanel {
         if (currentUser == null)
             return;
 
-        // Check if already requested
+        
         List<GroupRequest> userRequests = DataManager.getInstance().getGroupRequestsForUser(currentUser.getId());
         boolean alreadyRequested = userRequests.stream()
                 .anyMatch(r -> r.getGroupId().equals(group.getId()) && r.isPending());
@@ -238,7 +238,7 @@ public class GroupsPanel extends ModernPanel {
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        // Current council members
+        
         JLabel title = new JLabel("Council Members:");
         title.setFont(ModernTheme.FONT_BOLD);
         title.setForeground(ModernTheme.TEXT_LIGHT);
@@ -281,13 +281,13 @@ public class GroupsPanel extends ModernPanel {
 
         content.add(Box.createVerticalStrut(20));
 
-        // Add council member
+        
         JPanel addPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         addPanel.setOpaque(false);
 
         ModernButton addBtn = new ModernButton("Add Council Member");
         addBtn.addActionListener(e -> {
-            // Get all group members who aren't council
+            
             List<User> eligibleMembers = new ArrayList<>();
             for (String memberId : group.getMemberIds()) {
                 if (!group.isCouncil(memberId)) {
@@ -345,7 +345,7 @@ public class GroupsPanel extends ModernPanel {
             if (currentUser != null) {
                 g.addMember(currentUser.getId());
 
-                // If faculty, set as incharge
+                
                 if (currentUser.getUserType().equals("TEACHER")) {
                     g.setFacultyIncharge(currentUser.getId());
                     g.addCouncilMember(currentUser.getId());

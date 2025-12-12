@@ -22,17 +22,17 @@ public class ProfilePanel extends ModernPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Top: Profile Header
+        
         JPanel headerPanel = createHeaderPanel();
         add(headerPanel, BorderLayout.NORTH);
 
-        // Center: Posts and Interests
+        
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.setFont(ModernTheme.FONT_BOLD);
         tabbedPane.setBackground(ModernTheme.BG_DARK);
         tabbedPane.setForeground(ModernTheme.TEXT_DARK);
 
-        // My Posts Tab
+        
         postsContainer = new JPanel();
         postsContainer.setLayout(new BoxLayout(postsContainer, BoxLayout.Y_AXIS));
         postsContainer.setOpaque(false);
@@ -43,7 +43,7 @@ public class ProfilePanel extends ModernPanel {
         postsScroll.setBorder(null);
         tabbedPane.addTab("My Posts", postsScroll);
 
-        // Interests Tab
+        
         JPanel interestsPanel = createInterestsPanel();
         tabbedPane.addTab("Interests", interestsPanel);
 
@@ -57,13 +57,13 @@ public class ProfilePanel extends ModernPanel {
         panel.setLayout(new BorderLayout(15, 15));
         panel.setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Left: Avatar (Placeholder)
+        
         JLabel avatarLabel = new JLabel("👤");
         avatarLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 64));
         avatarLabel.setForeground(ModernTheme.TEXT_LIGHT);
         panel.add(avatarLabel, BorderLayout.WEST);
 
-        // Center: Info
+        
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setOpaque(false);
@@ -103,7 +103,7 @@ public class ProfilePanel extends ModernPanel {
 
         panel.add(infoPanel, BorderLayout.CENTER);
 
-        // Right: Edit Button
+        
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setOpaque(false);
         ModernButton editButton = new ModernButton("Edit Profile");
@@ -193,13 +193,13 @@ public class ProfilePanel extends ModernPanel {
             bioArea.setText(user.getBio() != null && !user.getBio().isEmpty() ? user.getBio() : "No bio yet.");
             statsLabel.setText(user.getFollowerCount() + " Followers • " + user.getFollowingCount() + " Following");
 
-            // Refresh Interests
+            
             interestsModel.clear();
             for (Interest i : user.getInterests()) {
                 interestsModel.addElement(i.getName() + " (" + i.getCategory() + ")");
             }
 
-            // Refresh Posts
+            
             postsContainer.removeAll();
             List<Post> myPosts = DataManager.getInstance().getPostsByUser(user.getId());
 
@@ -229,7 +229,7 @@ public class ProfilePanel extends ModernPanel {
                 new EmptyBorder(10, 10, 10, 10)));
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 150));
 
-        // Header
+        
         JPanel header = new JPanel(new BorderLayout());
         header.setOpaque(false);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, HH:mm");
@@ -238,7 +238,7 @@ public class ProfilePanel extends ModernPanel {
         header.add(timeLabel, BorderLayout.EAST);
         card.add(header, BorderLayout.NORTH);
 
-        // Content
+        
         JTextArea content = new JTextArea(post.getContent());
         content.setLineWrap(true);
         content.setWrapStyleWord(true);
@@ -247,7 +247,7 @@ public class ProfilePanel extends ModernPanel {
         content.setForeground(ModernTheme.TEXT_LIGHT);
         card.add(content, BorderLayout.CENTER);
 
-        // Footer (Stats)
+        
         JLabel stats = new JLabel("❤️ " + post.getLikeCount() + "   💬 " + post.getCommentCount());
         stats.setForeground(ModernTheme.TEXT_DARK);
         card.add(stats, BorderLayout.SOUTH);

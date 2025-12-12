@@ -14,9 +14,9 @@ public abstract class User implements Searchable, Storable {
     protected List<Interest> interests;
     protected String profilePicUrl;
     protected String bio;
-    protected java.util.Set<String> followers; // User IDs
-    protected java.util.Set<String> following; // User IDs
-    protected java.util.Set<String> blocked; // User IDs
+    protected java.util.Set<String> followers; 
+    protected java.util.Set<String> following; 
+    protected java.util.Set<String> blocked; 
 
     public User(String id, String name, String email, String password) {
         this.id = id;
@@ -140,13 +140,13 @@ public abstract class User implements Searchable, Storable {
         return false;
     }
 
-    // Abstract method to get the user type as a string
+    
     public abstract String getUserType();
 
     @Override
     public String toCSV() {
-        // Format:
-        // TYPE,ID,NAME,EMAIL,PASSWORD,INTERESTS,BIO,PROFILEPIC,FOLLOWERS,FOLLOWING,BLOCKED
+        
+        
         String interestString = interests.stream()
                 .map(i -> i.getName() + ":" + i.getCategory())
                 .collect(Collectors.joining("|"));

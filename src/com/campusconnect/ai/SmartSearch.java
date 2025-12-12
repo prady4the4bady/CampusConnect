@@ -4,14 +4,10 @@ import com.campusconnect.core.User;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * SmartSearch provides fuzzy search and auto-complete functionality
- */
+ 
 public class SmartSearch {
 
-    /**
-     * Search users with ranking by relevance
-     */
+     
     public static List<User> searchUsers(String query, List<User> users, int limit) {
         if (query == null || query.trim().isEmpty()) {
             return new ArrayList<>();
@@ -34,28 +30,26 @@ public class SmartSearch {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Calculate relevance score for user search
-     */
+     
     private static double calculateRelevanceScore(String query, User user) {
         double score = 0.0;
 
         String name = user.getName().toLowerCase();
         String email = user.getEmail().toLowerCase();
 
-        // Exact match (highest score)
+        
         if (name.equals(query)) {
             score += 100.0;
         }
-        // Starts with query
+        
         else if (name.startsWith(query)) {
             score += 50.0;
         }
-        // Contains query
+        
         else if (name.contains(query)) {
             score += 25.0;
         }
-        // Fuzzy match
+        
         else {
             double fuzzyScore = calculateLevenshteinSimilarity(query, name);
             if (fuzzyScore > 0.7) {
@@ -63,20 +57,18 @@ public class SmartSearch {
             }
         }
 
-        // Email match
+        
         if (email.contains(query)) {
             score += 15.0;
         }
 
-        // Popularity boost (users with more followers rank slightly higher)
+        
         score += Math.log10(user.getFollowerCount() + 1);
 
         return score;
     }
 
-    /**
-     * Get search suggestions for auto-complete
-     */
+     
     public static List<String> getSuggestions(String query, List<User> users, int limit) {
         if (query == null || query.trim().isEmpty() || query.length() < 2) {
             return new ArrayList<>();
@@ -97,9 +89,7 @@ public class SmartSearch {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Calculate Levenshtein distance-based similarity
-     */
+     
     private static double calculateLevenshteinSimilarity(String s1, String s2) {
         int distance = levenshteinDistance(s1, s2);
         int maxLen = Math.max(s1.length(), s2.length());
@@ -108,9 +98,7 @@ public class SmartSearch {
         return 1.0 - ((double) distance / maxLen);
     }
 
-    /**
-     * Calculate Levenshtein distance between two strings
-     */
+     
     private static int levenshteinDistance(String s1, String s2) {
         int[][] dp = new int[s1.length() + 1][s2.length() + 1];
 
@@ -133,9 +121,7 @@ public class SmartSearch {
         return dp[s1.length()][s2.length()];
     }
 
-    /**
-     * Extract @mentions from text
-     */
+     
     public static List<String> extractMentions(String text) {
         List<String> mentions = new ArrayList<>();
         String[] words = text.split("\\s+");

@@ -42,7 +42,7 @@ public class ModernScrollBarUI extends BasicScrollBarUI {
         int w = thumbBounds.width;
         int h = thumbBounds.height;
 
-        // Make scrollbar thinner
+        
         if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
             w = Math.min(6, w);
             thumbBounds.x += (thumbBounds.width - w) / 2;
@@ -51,7 +51,7 @@ public class ModernScrollBarUI extends BasicScrollBarUI {
             thumbBounds.y += (thumbBounds.height - h) / 2;
         }
 
-        // Draw rounded thumb
+        
         g2.setColor(thumbColor);
         g2.fillRoundRect(thumbBounds.x, thumbBounds.y, w, h, 6, 6);
 
@@ -63,7 +63,7 @@ public class ModernScrollBarUI extends BasicScrollBarUI {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // Paint track with background color
+        
         g2.setColor(trackColor);
         g2.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
 

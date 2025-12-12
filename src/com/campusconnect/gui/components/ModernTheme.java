@@ -4,36 +4,36 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class ModernTheme {
-    // Colors - Modern Dark Theme
-    public static final Color PRIMARY = new Color(64, 123, 255); // Vibrant Blue
-    public static final Color ACCENT = new Color(255, 171, 0); // Amber/Gold
-    public static final Color BG_DARK = new Color(18, 18, 18); // Deep Dark
-    public static final Color BG_LIGHT = new Color(30, 30, 30); // Lighter Dark (Surfaces)
+    
+    public static final Color PRIMARY = new Color(64, 123, 255); 
+    public static final Color ACCENT = new Color(255, 171, 0); 
+    public static final Color BG_DARK = new Color(18, 18, 18); 
+    public static final Color BG_LIGHT = new Color(30, 30, 30); 
     public static final Color TEXT_LIGHT = new Color(240, 240, 240);
-    public static final Color TEXT_DARK = new Color(180, 180, 180); // Muted text
-    public static final Color PANEL_BG = new Color(30, 30, 30); // Surface color
+    public static final Color TEXT_DARK = new Color(180, 180, 180); 
+    public static final Color PANEL_BG = new Color(30, 30, 30); 
     public static final Color INPUT_BG = new Color(45, 45, 45);
     public static final Color BORDER = new Color(60, 60, 60);
 
-    // Fonts
+    
     public static final Font FONT_TITLE = new Font("Segoe UI", Font.BOLD, 28);
     public static final Font FONT_HEADER = new Font("Segoe UI", Font.BOLD, 20);
     public static final Font FONT_REGULAR = new Font("Segoe UI", Font.PLAIN, 14);
     public static final Font FONT_BOLD = new Font("Segoe UI", Font.BOLD, 14);
     public static final Font FONT_SMALL = new Font("Segoe UI", Font.PLAIN, 12);
 
-    // UI Styling Methods
+    
     public static void styleModernTabs(javax.swing.JTabbedPane tabbedPane) {
         tabbedPane.setBackground(BG_DARK);
         tabbedPane.setForeground(TEXT_LIGHT);
         tabbedPane.setFont(FONT_BOLD);
         tabbedPane.setBorder(null);
 
-        // Set tab placement and appearance
+        
         tabbedPane.setOpaque(true);
         tabbedPane.setTabPlacement(javax.swing.JTabbedPane.TOP);
 
-        // Apply modern scrollbar to tab pane
+        
         if (tabbedPane.getComponentCount() > 0) {
             for (int i = 0; i < tabbedPane.getComponentCount(); i++) {
                 java.awt.Component comp = tabbedPane.getComponent(i);

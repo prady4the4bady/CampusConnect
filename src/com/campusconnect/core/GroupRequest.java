@@ -8,7 +8,7 @@ public class GroupRequest implements Storable, Comparable<GroupRequest> {
     private String id;
     private String groupId;
     private String userId;
-    private String status; // PENDING, APPROVED, REJECTED
+    private String status; 
     private LocalDateTime timestamp;
 
     public GroupRequest(String id, String groupId, String userId) {
@@ -19,7 +19,7 @@ public class GroupRequest implements Storable, Comparable<GroupRequest> {
         this.timestamp = LocalDateTime.now();
     }
 
-    // Getters
+    
     public String getId() {
         return id;
     }
@@ -40,7 +40,7 @@ public class GroupRequest implements Storable, Comparable<GroupRequest> {
         return timestamp;
     }
 
-    // Status management
+    
     public void approve() {
         this.status = "APPROVED";
     }
@@ -73,6 +73,6 @@ public class GroupRequest implements Storable, Comparable<GroupRequest> {
 
     @Override
     public int compareTo(GroupRequest other) {
-        return other.timestamp.compareTo(this.timestamp); // Newest first
+        return other.timestamp.compareTo(this.timestamp); 
     }
 }

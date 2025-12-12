@@ -16,7 +16,7 @@ public class NotificationsPanel extends ModernPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Top: Header
+        
         JPanel headerPanel = new JPanel(new BorderLayout());
         headerPanel.setOpaque(false);
 
@@ -31,7 +31,7 @@ public class NotificationsPanel extends ModernPanel {
 
         add(headerPanel, BorderLayout.NORTH);
 
-        // Center: Notifications List
+        
         notificationsContainer = new JPanel();
         notificationsContainer.setLayout(new BoxLayout(notificationsContainer, BoxLayout.Y_AXIS));
         notificationsContainer.setOpaque(false);
@@ -93,7 +93,7 @@ public class NotificationsPanel extends ModernPanel {
         JPanel card = new ModernPanel();
         card.setLayout(new BorderLayout(15, 10));
 
-        // Highlight unread notifications
+        
         if (!notif.isRead()) {
             card.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(ModernTheme.ACCENT, 1),
@@ -105,7 +105,7 @@ public class NotificationsPanel extends ModernPanel {
         }
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
 
-        // Icon based on type
+        
         String icon = "🔔";
         switch (notif.getType()) {
             case "LIKE":
@@ -127,7 +127,7 @@ public class NotificationsPanel extends ModernPanel {
         iconLabel.setForeground(ModernTheme.TEXT_LIGHT);
         card.add(iconLabel, BorderLayout.WEST);
 
-        // Content
+        
         JPanel contentPanel = new JPanel(new BorderLayout(0, 5));
         contentPanel.setOpaque(false);
 

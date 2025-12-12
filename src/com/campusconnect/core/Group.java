@@ -61,7 +61,7 @@ public class Group implements Storable {
         memberIds.remove(userId);
     }
 
-    // Council management
+    
     public void addCouncilMember(String userId) {
         councilMembers.add(userId);
     }

@@ -59,7 +59,7 @@ public class LoginPanel extends ModernPanel {
         gbc.gridwidth = 2;
         add(loginButton, gbc);
 
-        // Sign Up Button
+        
         ModernButton signUpButton = new ModernButton("Create Account");
         signUpButton.addActionListener(e -> mainFrame.showSignUp());
         gbc.gridy++;
@@ -71,7 +71,7 @@ public class LoginPanel extends ModernPanel {
         gbc.gridy++;
         add(statusLabel, gbc);
 
-        // Demo User Hint
+        
         JLabel hintLabel = new JLabel("Demo: aarav@bits-dubai.ac.ae / pass123");
         hintLabel.setForeground(Color.GRAY);
         hintLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -88,16 +88,16 @@ public class LoginPanel extends ModernPanel {
             return;
         }
 
-        // Disable inputs during login
+        
         setControlsEnabled(false);
         statusLabel.setText("Logging in...");
         statusLabel.setForeground(ModernTheme.ACCENT);
 
-        // Run login in background
+        
         SwingWorker<User, Void> worker = new SwingWorker<>() {
             @Override
             protected User doInBackground() throws Exception {
-                // Simulate small delay for better UX or if DB is slow
+                
                 Thread.sleep(500);
                 return DataManager.getInstance().login(email, password);
             }
@@ -108,7 +108,7 @@ public class LoginPanel extends ModernPanel {
                     User user = get();
                     if (user != null) {
                         statusLabel.setText("Login successful!");
-                        // Initialize dashboard in background if needed, or just show it
+                        
                         mainFrame.showDashboard();
                     } else {
                         statusLabel.setText("Invalid email or password.");
@@ -129,7 +129,7 @@ public class LoginPanel extends ModernPanel {
     private void setControlsEnabled(boolean enabled) {
         emailField.setEnabled(enabled);
         passwordField.setEnabled(enabled);
-        // Find buttons to disable/enable
+        
         for (Component c : getComponents()) {
             if (c instanceof JButton) {
                 c.setEnabled(enabled);

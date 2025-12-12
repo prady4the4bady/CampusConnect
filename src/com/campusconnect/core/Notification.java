@@ -6,13 +6,13 @@ import java.time.format.DateTimeFormatter;
 
 public class Notification implements Storable, Comparable<Notification> {
     private String id;
-    private String userId; // Who receives this notification
-    private String type; // FOLLOW, LIKE, COMMENT, MENTION
+    private String userId; 
+    private String type; 
     private String message;
-    private String relatedId; // ID of related post/user
+    private String relatedId; 
     private LocalDateTime timestamp;
     private boolean read;
-    private int priority; // 1-5, higher is more important
+    private int priority; 
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
@@ -42,7 +42,7 @@ public class Notification implements Storable, Comparable<Notification> {
         }
     }
 
-    // Getters
+    
     public String getId() {
         return id;
     }
@@ -75,7 +75,7 @@ public class Notification implements Storable, Comparable<Notification> {
         return priority;
     }
 
-    // Setters
+    
     public void setRead(boolean read) {
         this.read = read;
     }
@@ -104,7 +104,7 @@ public class Notification implements Storable, Comparable<Notification> {
 
     @Override
     public int compareTo(Notification other) {
-        // Sort by priority first, then by timestamp (newest first)
+        
         if (this.priority != other.priority) {
             return other.priority - this.priority;
         }

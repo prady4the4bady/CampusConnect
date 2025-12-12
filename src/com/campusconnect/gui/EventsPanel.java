@@ -18,7 +18,7 @@ public class EventsPanel extends ModernPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Header
+        
         JPanel headerPanel = new JPanel(new BorderLayout());
         headerPanel.setOpaque(false);
 
@@ -33,7 +33,7 @@ public class EventsPanel extends ModernPanel {
 
         add(headerPanel, BorderLayout.NORTH);
 
-        // Events List
+        
         eventsContainer = new JPanel();
         eventsContainer.setLayout(new BoxLayout(eventsContainer, BoxLayout.Y_AXIS));
         eventsContainer.setOpaque(false);
@@ -76,7 +76,7 @@ public class EventsPanel extends ModernPanel {
                 new EmptyBorder(10, 10, 10, 10)));
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
 
-        // Date Box (Left)
+        
         JPanel datePanel = new JPanel(new GridLayout(2, 1));
         datePanel.setOpaque(false);
         datePanel.setPreferredSize(new Dimension(60, 60));
@@ -95,7 +95,7 @@ public class EventsPanel extends ModernPanel {
         datePanel.add(dayLabel);
         card.add(datePanel, BorderLayout.WEST);
 
-        // Info (Center)
+        
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setOpaque(false);
@@ -117,7 +117,7 @@ public class EventsPanel extends ModernPanel {
 
         card.add(infoPanel, BorderLayout.CENTER);
 
-        // Desc (Bottom)
+        
         JLabel descLabel = new JLabel(e.getDescription());
         descLabel.setFont(ModernTheme.FONT_REGULAR);
         descLabel.setForeground(ModernTheme.TEXT_LIGHT);
@@ -132,7 +132,7 @@ public class EventsPanel extends ModernPanel {
             String desc = JOptionPane.showInputDialog(this, "Description:");
             String loc = JOptionPane.showInputDialog(this, "Location:");
 
-            // Simplified date input for prototype
+            
             String daysStr = JOptionPane.showInputDialog(this, "Days from now (e.g. 1, 2):");
             int days = 1;
             try {

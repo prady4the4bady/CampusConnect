@@ -11,7 +11,7 @@ public class EncryptionUtil {
     private static SecretKeySpec secretKey;
     private static byte[] key;
     private static final String ALGORITHM = "AES";
-    // Hardcoded key for prototype simplicity. In production, use KeyStore.
+    
     private static final String SECRET = "CampusConnectSuperSecretKey2025";
 
     static {
@@ -23,7 +23,7 @@ public class EncryptionUtil {
             key = myKey.getBytes(StandardCharsets.UTF_8);
             MessageDigest sha = MessageDigest.getInstance("SHA-1");
             key = sha.digest(key);
-            key = Arrays.copyOf(key, 16); // Use first 128 bits
+            key = Arrays.copyOf(key, 16); 
             secretKey = new SecretKeySpec(key, ALGORITHM);
         } catch (Exception e) {
             e.printStackTrace();

@@ -17,13 +17,13 @@ public class ChatPanel extends ModernPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Header
+        
         JLabel titleLabel = new JLabel("Campus Chat");
         titleLabel.setFont(ModernTheme.FONT_HEADER);
         titleLabel.setForeground(ModernTheme.TEXT_LIGHT);
         add(titleLabel, BorderLayout.NORTH);
 
-        // Chat Area
+        
         chatContainer = new JPanel();
         chatContainer.setLayout(new BoxLayout(chatContainer, BoxLayout.Y_AXIS));
         chatContainer.setOpaque(false);
@@ -34,7 +34,7 @@ public class ChatPanel extends ModernPanel {
         scrollPane.setBorder(null);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Input Area
+        
         JPanel inputPanel = new JPanel(new BorderLayout(10, 0));
         inputPanel.setOpaque(false);
 
@@ -65,7 +65,7 @@ public class ChatPanel extends ModernPanel {
         chatContainer.revalidate();
         chatContainer.repaint();
 
-        // Scroll to bottom
+        
         SwingUtilities.invokeLater(() -> {
             JScrollBar vertical = ((JScrollPane) chatContainer.getParent().getParent()).getVerticalScrollBar();
             vertical.setValue(vertical.getMaximum());
@@ -76,7 +76,7 @@ public class ChatPanel extends ModernPanel {
         JPanel row = new JPanel(new BorderLayout());
         row.setOpaque(false);
 
-        JPanel bubble = new ModernPanel(); // Rounded corners
+        JPanel bubble = new ModernPanel(); 
         bubble.setLayout(new BorderLayout(5, 5));
         bubble.setBorder(new EmptyBorder(10, 10, 10, 10));
 
@@ -86,7 +86,7 @@ public class ChatPanel extends ModernPanel {
             bubble.setBackground(ModernTheme.PANEL_BG);
         }
 
-        // Sender Name (if not me)
+        
         if (!isMe) {
             String senderName = "Unknown";
             User u = DataManager.getInstance().getUserById(m.getSenderId());
@@ -99,7 +99,7 @@ public class ChatPanel extends ModernPanel {
             bubble.add(nameLabel, BorderLayout.NORTH);
         }
 
-        // Content
+        
         JTextArea content = new JTextArea(m.getContent());
         content.setFont(ModernTheme.FONT_REGULAR);
         content.setForeground(ModernTheme.TEXT_LIGHT);
@@ -110,7 +110,7 @@ public class ChatPanel extends ModernPanel {
         content.setMaximumSize(new Dimension(300, Integer.MAX_VALUE));
         bubble.add(content, BorderLayout.CENTER);
 
-        // Time
+        
         JLabel timeLabel = new JLabel(m.getTimestamp().format(DateTimeFormatter.ofPattern("HH:mm")));
         timeLabel.setFont(ModernTheme.FONT_SMALL);
         timeLabel.setForeground(ModernTheme.TEXT_DARK);

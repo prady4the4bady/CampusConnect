@@ -18,11 +18,11 @@ public class ExplorePanel extends ModernPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Top: Search Section
+        
         JPanel searchPanel = createSearchPanel();
         add(searchPanel, BorderLayout.NORTH);
 
-        // Center: Users List
+        
         usersContainer = new JPanel();
         usersContainer.setLayout(new BoxLayout(usersContainer, BoxLayout.Y_AXIS));
         usersContainer.setOpaque(false);
@@ -41,13 +41,13 @@ public class ExplorePanel extends ModernPanel {
         panel.setLayout(new BorderLayout(10, 10));
         panel.setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Title
+        
         JLabel titleLabel = new JLabel("Discover People");
         titleLabel.setFont(ModernTheme.FONT_HEADER);
         titleLabel.setForeground(ModernTheme.TEXT_LIGHT);
         panel.add(titleLabel, BorderLayout.NORTH);
 
-        // Search bar
+        
         JPanel searchBarPanel = new JPanel(new BorderLayout(10, 0));
         searchBarPanel.setOpaque(false);
 
@@ -60,7 +60,7 @@ public class ExplorePanel extends ModernPanel {
 
         panel.add(searchBarPanel, BorderLayout.CENTER);
 
-        // Result count
+        
         resultCountLabel = new JLabel("Showing all users");
         resultCountLabel.setFont(ModernTheme.FONT_SMALL);
         resultCountLabel.setForeground(ModernTheme.TEXT_DARK);
@@ -81,15 +81,15 @@ public class ExplorePanel extends ModernPanel {
         List<User> results;
 
         if (query.isEmpty()) {
-            // Show all users (except current user)
+            
             results = allUsers.stream()
                     .filter(u -> !u.getId().equals(currentUser.getId()))
                     .collect(java.util.stream.Collectors.toList());
             resultCountLabel.setText("Showing all users (" + results.size() + ")");
         } else {
-            // Smart search with AI
+            
             results = SmartSearch.searchUsers(query, allUsers, 50);
-            // Remove current user from results
+            
             results.removeIf(u -> u.getId().equals(currentUser.getId()));
             resultCountLabel.setText("Found " + results.size() + " users matching \"" + query + "\"");
         }
@@ -115,9 +115,9 @@ public class ExplorePanel extends ModernPanel {
 
     public void refresh() {
         searchField.setText("");
-        performSearch(); // Show all users by default
+        performSearch(); 
 
-        // Also show AI recommendations at the top
+        
         showRecommendations();
     }
 
@@ -132,7 +132,7 @@ public class ExplorePanel extends ModernPanel {
         if (!recommended.isEmpty()) {
             usersContainer.removeAll();
 
-            // Recommendations section
+            
             JLabel recLabel = new JLabel("🌟 Recommended for You");
             recLabel.setFont(ModernTheme.FONT_BOLD);
             recLabel.setForeground(ModernTheme.ACCENT);
@@ -146,13 +146,13 @@ public class ExplorePanel extends ModernPanel {
                 usersContainer.add(Box.createVerticalStrut(10));
             }
 
-            // Separator
+            
             JSeparator separator = new JSeparator();
             separator.setMaximumSize(new Dimension(Integer.MAX_VALUE, 2));
             usersContainer.add(separator);
             usersContainer.add(Box.createVerticalStrut(15));
 
-            // All users section
+            
             JLabel allLabel = new JLabel("All Users");
             allLabel.setFont(ModernTheme.FONT_BOLD);
             allLabel.setForeground(ModernTheme.TEXT_LIGHT);
@@ -160,7 +160,7 @@ public class ExplorePanel extends ModernPanel {
             usersContainer.add(allLabel);
             usersContainer.add(Box.createVerticalStrut(10));
 
-            // Add remaining users
+            
             List<User> otherUsers = allUsers.stream()
                     .filter(u -> !u.getId().equals(currentUser.getId()) && !recommended.contains(u))
                     .collect(java.util.stream.Collectors.toList());
@@ -173,7 +173,7 @@ public class ExplorePanel extends ModernPanel {
 
             resultCountLabel.setText("Showing " + (recommended.size() + otherUsers.size()) + " users");
         } else {
-            performSearch(); // Fallback to regular display
+            performSearch(); 
         }
 
         usersContainer.revalidate();
@@ -188,7 +188,7 @@ public class ExplorePanel extends ModernPanel {
                 new EmptyBorder(15, 15, 15, 15)));
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 120));
 
-        // Left: User info
+        
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setOpaque(false);
@@ -211,7 +211,7 @@ public class ExplorePanel extends ModernPanel {
         typeLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         infoPanel.add(typeLabel);
 
-        // Interests
+        
         if (!user.getInterests().isEmpty()) {
             String interests = user.getInterests().stream()
                     .limit(3)
@@ -224,7 +224,7 @@ public class ExplorePanel extends ModernPanel {
             infoPanel.add(interestsLabel);
         }
 
-        // Stats
+        
         JLabel statsLabel = new JLabel(
                 user.getFollowerCount() + " followers • " + user.getFollowingCount() + " following");
         statsLabel.setFont(ModernTheme.FONT_SMALL);
@@ -234,7 +234,7 @@ public class ExplorePanel extends ModernPanel {
 
         card.add(infoPanel, BorderLayout.CENTER);
 
-        // Right: Follow button
+        
         User currentUser = DataManager.getInstance().getCurrentUser();
         if (currentUser != null) {
             boolean isFollowing = currentUser.isFollowing(user.getId());

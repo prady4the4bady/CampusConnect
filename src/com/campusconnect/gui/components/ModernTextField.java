@@ -10,7 +10,7 @@ public class ModernTextField extends JTextField {
     public ModernTextField(int columns) {
         super(columns);
         setOpaque(false);
-        setBorder(new EmptyBorder(8, 10, 8, 10)); // Increased padding
+        setBorder(new EmptyBorder(8, 10, 8, 10)); 
         setFont(ModernTheme.FONT_REGULAR);
         setForeground(Color.WHITE);
         setCaretColor(ModernTheme.ACCENT);
@@ -34,11 +34,11 @@ public class ModernTextField extends JTextField {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // Background
+        
         g2.setColor(getBackground());
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 10, 10);
 
-        // Border
+        
         if (isFocused) {
             g2.setColor(ModernTheme.PRIMARY);
             g2.setStroke(new BasicStroke(2));

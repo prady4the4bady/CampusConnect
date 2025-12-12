@@ -17,7 +17,7 @@ public class Message implements Storable {
         this.timestamp = LocalDateTime.now();
     }
 
-    // Constructor for loading
+    
     public Message(String senderId, String content, LocalDateTime timestamp) {
         this.senderId = senderId;
         this.content = content;
@@ -35,7 +35,7 @@ public class Message implements Storable {
 
     @Override
     public void fromCSV(String csv) {
-        // Not used directly, factory or manual parsing usually
+        
     }
     
     public static Message parse(String csv) {

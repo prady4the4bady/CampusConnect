@@ -22,7 +22,7 @@ public class SignUpPanel extends ModernPanel {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Title
+        
         JLabel titleLabel = new JLabel("Create Account");
         titleLabel.setFont(ModernTheme.FONT_TITLE);
         titleLabel.setForeground(ModernTheme.TEXT_LIGHT);
@@ -41,7 +41,7 @@ public class SignUpPanel extends ModernPanel {
 
         gbc.gridwidth = 1;
 
-        // Name
+        
         gbc.gridy++;
         JLabel nameLabel = new JLabel("Full Name:");
         nameLabel.setForeground(ModernTheme.TEXT_LIGHT);
@@ -53,7 +53,7 @@ public class SignUpPanel extends ModernPanel {
         gbc.gridx = 1;
         add(nameField, gbc);
 
-        // Email
+        
         gbc.gridy++;
         JLabel emailLabel = new JLabel("Email Address:");
         emailLabel.setForeground(ModernTheme.TEXT_LIGHT);
@@ -65,7 +65,7 @@ public class SignUpPanel extends ModernPanel {
         gbc.gridx = 1;
         add(emailField, gbc);
 
-        // Email hint
+        
         JLabel emailHint = new JLabel("Use your institutional email");
         emailHint.setFont(ModernTheme.FONT_SMALL);
         emailHint.setForeground(ModernTheme.TEXT_DARK);
@@ -73,7 +73,7 @@ public class SignUpPanel extends ModernPanel {
         gbc.gridy++;
         add(emailHint, gbc);
 
-        // User Type
+        
         gbc.gridy++;
         JLabel userTypeLabel = new JLabel("User Type:");
         userTypeLabel.setForeground(ModernTheme.TEXT_LIGHT);
@@ -88,7 +88,7 @@ public class SignUpPanel extends ModernPanel {
         gbc.gridx = 1;
         add(userTypeCombo, gbc);
 
-        // Password
+        
         gbc.gridy++;
         JLabel passLabel = new JLabel("Password:");
         passLabel.setForeground(ModernTheme.TEXT_LIGHT);
@@ -100,7 +100,7 @@ public class SignUpPanel extends ModernPanel {
         gbc.gridx = 1;
         add(passwordField, gbc);
 
-        // Confirm Password
+        
         gbc.gridy++;
         JLabel confirmLabel = new JLabel("Confirm Password:");
         confirmLabel.setForeground(ModernTheme.TEXT_LIGHT);
@@ -112,7 +112,7 @@ public class SignUpPanel extends ModernPanel {
         gbc.gridx = 1;
         add(confirmPasswordField, gbc);
 
-        // Sign Up Button
+        
         ModernButton signUpButton = new ModernButton("Sign Up");
         signUpButton.addActionListener(e -> handleSignUp());
         gbc.gridx = 0;
@@ -120,14 +120,14 @@ public class SignUpPanel extends ModernPanel {
         gbc.gridwidth = 2;
         add(signUpButton, gbc);
 
-        // Status Label
+        
         statusLabel = new JLabel(" ");
         statusLabel.setForeground(Color.RED);
         statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gbc.gridy++;
         add(statusLabel, gbc);
 
-        // Back to Login
+        
         ModernButton backButton = new ModernButton("Back to Login");
         backButton.addActionListener(e -> mainFrame.showLogin());
         gbc.gridy++;
@@ -141,7 +141,7 @@ public class SignUpPanel extends ModernPanel {
         String confirmPassword = new String(confirmPasswordField.getPassword());
         String userType = (String) userTypeCombo.getSelectedItem();
 
-        // Validation
+        
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             statusLabel.setText("All fields are required");
             statusLabel.setForeground(Color.RED);
@@ -166,7 +166,7 @@ public class SignUpPanel extends ModernPanel {
             return;
         }
 
-        // Check if email already exists
+        
         for (User u : DataManager.getInstance().getUsers()) {
             if (u.getEmail().equalsIgnoreCase(email)) {
                 statusLabel.setText("Email already registered");
@@ -175,7 +175,7 @@ public class SignUpPanel extends ModernPanel {
             }
         }
 
-        // Create new user
+        
         String userId = "U" + System.currentTimeMillis();
         User newUser = UserFactory.createUser(userType, userId, name, email, password);
 
@@ -184,7 +184,7 @@ public class SignUpPanel extends ModernPanel {
             statusLabel.setText("Account created successfully!");
             statusLabel.setForeground(ModernTheme.ACCENT);
 
-            // Auto-login after 1 second
+            
             Timer timer = new Timer(1000, e -> {
                 DataManager.getInstance().setCurrentUser(newUser);
                 mainFrame.showDashboard();

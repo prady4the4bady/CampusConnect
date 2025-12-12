@@ -50,7 +50,7 @@ public class Event implements Storable, Comparable<Event> {
 
     @Override
     public String toCSV() {
-        // Sanitize fields to remove commas to prevent CSV corruption
+        
         String safeName = name.replace(",", ";");
         String safeDescription = description.replace(",", ";");
         String safeLocation = location.replace(",", ";");
@@ -64,17 +64,17 @@ public class Event implements Storable, Comparable<Event> {
         if (parts.length < 6)
             return;
 
-        // Strategy: Find the date field to anchor the parsing
+        
         int dateIndex = -1;
-        // Date is at least at index 3 (id, name, desc...), and followed by at least
-        // location and organizerId
+        
+        
         for (int i = 3; i < parts.length - 1; i++) {
             try {
                 LocalDateTime.parse(parts[i], formatter);
                 dateIndex = i;
                 break;
             } catch (Exception e) {
-                // Not the date field
+                
             }
         }
 
@@ -82,7 +82,7 @@ public class Event implements Storable, Comparable<Event> {
             this.id = parts[0];
             this.name = parts[1];
 
-            // Reconstruct description (parts[2] to parts[dateIndex-1])
+            
             StringBuilder descBuilder = new StringBuilder();
             for (int i = 2; i < dateIndex; i++) {
                 descBuilder.append(parts[i]);
@@ -93,8 +93,8 @@ public class Event implements Storable, Comparable<Event> {
 
             this.dateTime = LocalDateTime.parse(parts[dateIndex], formatter);
 
-            // Reconstruct location (parts[dateIndex+1] to parts[length-2])
-            // Assuming the last part is always organizerId
+            
+            
             StringBuilder locBuilder = new StringBuilder();
             for (int i = dateIndex + 1; i < parts.length - 1; i++) {
                 locBuilder.append(parts[i]);
@@ -105,7 +105,7 @@ public class Event implements Storable, Comparable<Event> {
 
             this.organizerId = parts[parts.length - 1];
         } else {
-            // Fallback if date parsing fails or structure is unexpected
+            
             if (parts.length >= 6) {
                 this.id = parts[0];
                 this.name = parts[1];
@@ -113,7 +113,7 @@ public class Event implements Storable, Comparable<Event> {
                 try {
                     this.dateTime = LocalDateTime.parse(parts[3], formatter);
                 } catch (Exception e) {
-                    // Keep existing or null if critical
+                    
                 }
                 this.location = parts[4];
                 this.organizerId = parts[5];

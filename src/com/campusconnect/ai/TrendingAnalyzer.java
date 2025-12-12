@@ -7,20 +7,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/**
- * TrendingAnalyzer identifies trending content and active users
- */
+ 
 public class TrendingAnalyzer {
 
     private static final Pattern HASHTAG_PATTERN = Pattern.compile("#(\\w+)");
 
-    /**
-     * Get trending hashtags from recent posts
-     */
+     
     public static List<String> getTrendingHashtags(List<Post> posts, int limit) {
         Map<String, Integer> hashtagCounts = new HashMap<>();
 
-        // Consider posts from last 24 hours
+        
         java.time.LocalDateTime cutoff = java.time.LocalDateTime.now().minusHours(24);
 
         for (Post post : posts) {
@@ -39,9 +35,7 @@ public class TrendingAnalyzer {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Extract hashtags from text
-     */
+     
     public static List<String> extractHashtags(String text) {
         List<String> hashtags = new ArrayList<>();
         Matcher matcher = HASHTAG_PATTERN.matcher(text);
@@ -51,11 +45,9 @@ public class TrendingAnalyzer {
         return hashtags;
     }
 
-    /**
-     * Get trending (viral) posts based on engagement
-     */
+     
     public static List<Post> getTrendingPosts(List<Post> posts, int limit) {
-        // Calculate trending score for each post
+        
         Map<Post, Double> trendingScores = new HashMap<>();
 
         for (Post post : posts) {
@@ -70,30 +62,28 @@ public class TrendingAnalyzer {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Calculate trending score for a post
-     */
+     
     private static double calculateTrendingScore(Post post) {
         double score = 0.0;
 
-        // Engagement metrics
+        
         int likes = post.getLikeCount();
         int comments = post.getCommentCount();
 
-        // Weighted engagement (comments worth more)
+        
         double engagementScore = likes * 1.0 + comments * 3.0;
         score += engagementScore;
 
-        // Recency boost - newer posts get higher priority
+        
         long ageHours = java.time.Duration.between(
                 post.getTimestamp(),
                 java.time.LocalDateTime.now()).toHours();
 
-        // Decay function: newer = higher score
-        double recencyMultiplier = Math.exp(-ageHours / 12.0); // Exponential decay
+        
+        double recencyMultiplier = Math.exp(-ageHours / 12.0); 
         score *= recencyMultiplier;
 
-        // Velocity bonus - rapid engagement
+        
         if (ageHours > 0) {
             double velocity = engagementScore / Math.max(ageHours, 1);
             score += velocity * 5.0;
@@ -102,13 +92,11 @@ public class TrendingAnalyzer {
         return score;
     }
 
-    /**
-     * Get most active users based on posting and engagement
-     */
+     
     public static List<User> getActiveUsers(List<User> users, List<Post> posts, int limit) {
         Map<String, Integer> activityScores = new HashMap<>();
 
-        // Score based on posts created (last 7 days)
+        
         java.time.LocalDateTime cutoff = java.time.LocalDateTime.now().minusDays(7);
         for (Post post : posts) {
             if (post.getTimestamp().isAfter(cutoff)) {
@@ -127,9 +115,7 @@ public class TrendingAnalyzer {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Calculate engagement rate for a user
-     */
+     
     public static double calculateEngagementRate(String userId, List<Post> posts) {
         List<Post> userPosts = posts.stream()
                 .filter(p -> p.getAuthorId().equals(userId))

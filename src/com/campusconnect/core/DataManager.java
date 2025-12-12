@@ -14,7 +14,7 @@ public class DataManager {
     private List<Message> messages;
     private List<WalkieTalkieChannel> channels;
     private List<Post> posts;
-    private Map<String, List<Comment>> postComments; // postId -> comments
+    private Map<String, List<Comment>> postComments; 
     private List<Notification> notifications;
     private List<GroupRequest> groupRequests;
     private User currentUser;
@@ -124,9 +124,9 @@ public class DataManager {
         saveChannels();
     }
 
-    // Social Media Methods
+    
     public void addPost(Post post) {
-        posts.add(0, post); // Add to beginning for reverse chronological
+        posts.add(0, post); 
         savePosts();
     }
 
@@ -140,7 +140,7 @@ public class DataManager {
     public void addComment(String postId, Comment comment) {
         postComments.computeIfAbsent(postId, k -> new ArrayList<>()).add(comment);
 
-        // Update post object
+        
         Post post = getPostById(postId);
         if (post != null) {
             post.addComment(comment);
@@ -204,7 +204,7 @@ public class DataManager {
             followee.addFollower(followerId);
             saveUsers();
 
-            // Create notification
+            
             String notifId = "N" + System.currentTimeMillis();
             Notification notif = new Notification(notifId, followeeId, "FOLLOW",
                     follower.getName() + " started following you", followerId);
@@ -223,7 +223,7 @@ public class DataManager {
         }
     }
 
-    // Group Request Management
+    
     public void addGroupRequest(GroupRequest request) {
         groupRequests.add(request);
         saveGroupRequests();
@@ -237,7 +237,7 @@ public class DataManager {
 
         if (request != null && request.isPending()) {
             request.approve();
-            // Add user to group
+            
             Group group = groups.get(request.getGroupId());
             if (group != null) {
                 group.addMember(request.getUserId());
@@ -294,7 +294,7 @@ public class DataManager {
         try {
             Files.createDirectories(Paths.get(DATA_DIR));
 
-            // Load Users
+            
             if (Files.exists(Paths.get(USERS_FILE))) {
                 List<String> lines = Files.readAllLines(Paths.get(USERS_FILE));
                 for (String line : lines) {
@@ -309,7 +309,7 @@ public class DataManager {
                 }
             }
 
-            // Load Groups
+            
             if (Files.exists(Paths.get(GROUPS_FILE))) {
                 List<String> lines = Files.readAllLines(Paths.get(GROUPS_FILE));
                 for (String line : lines) {
@@ -324,7 +324,7 @@ public class DataManager {
                 }
             }
 
-            // Load Events
+            
             if (Files.exists(Paths.get(EVENTS_FILE))) {
                 List<String> lines = Files.readAllLines(Paths.get(EVENTS_FILE));
                 for (String line : lines) {
@@ -339,7 +339,7 @@ public class DataManager {
                 }
             }
 
-            // Load Messages
+            
             if (Files.exists(Paths.get(MESSAGES_FILE))) {
                 List<String> lines = Files.readAllLines(Paths.get(MESSAGES_FILE));
                 for (String line : lines) {
@@ -354,7 +354,7 @@ public class DataManager {
                 }
             }
 
-            // Load Channels
+            
             if (Files.exists(Paths.get(CHANNELS_FILE))) {
                 List<String> lines = Files.readAllLines(Paths.get(CHANNELS_FILE));
                 for (String line : lines) {
@@ -369,7 +369,7 @@ public class DataManager {
                 }
             }
 
-            // Load Posts
+            
             if (Files.exists(Paths.get(POSTS_FILE))) {
                 List<String> lines = Files.readAllLines(Paths.get(POSTS_FILE));
                 for (String line : lines) {
@@ -384,7 +384,7 @@ public class DataManager {
                 }
             }
 
-            // Load Comments
+            
             if (Files.exists(Paths.get(COMMENTS_FILE))) {
                 List<String> lines = Files.readAllLines(Paths.get(COMMENTS_FILE));
                 for (String line : lines) {
@@ -395,7 +395,7 @@ public class DataManager {
                             c.fromCSV(decrypted);
                             postComments.computeIfAbsent(c.getPostId(), k -> new ArrayList<>()).add(c);
 
-                            // Also add to post object
+                            
                             Post post = getPostById(c.getPostId());
                             if (post != null) {
                                 post.addComment(c);
@@ -405,7 +405,7 @@ public class DataManager {
                 }
             }
 
-            // Load Notifications
+            
             if (Files.exists(Paths.get(NOTIFICATIONS_FILE))) {
                 List<String> lines = Files.readAllLines(Paths.get(NOTIFICATIONS_FILE));
                 for (String line : lines) {
@@ -420,7 +420,7 @@ public class DataManager {
                 }
             }
 
-            // Load Group Requests
+            
             if (Files.exists(Paths.get(GROUP_REQUESTS_FILE))) {
                 List<String> lines = Files.readAllLines(Paths.get(GROUP_REQUESTS_FILE));
                 for (String line : lines) {

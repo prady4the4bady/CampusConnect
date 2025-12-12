@@ -24,7 +24,7 @@ public class Comment implements Storable, Comparable<Comment> {
         this.likes = new HashSet<>();
     }
 
-    // Getters
+    
     public String getId() {
         return id;
     }
@@ -53,7 +53,7 @@ public class Comment implements Storable, Comparable<Comment> {
         return likes.size();
     }
 
-    // Like management
+    
     public void addLike(String userId) {
         likes.add(userId);
     }
@@ -92,7 +92,7 @@ public class Comment implements Storable, Comparable<Comment> {
 
     @Override
     public int compareTo(Comment other) {
-        // Older comments first
+        
         return this.timestamp.compareTo(other.timestamp);
     }
 }

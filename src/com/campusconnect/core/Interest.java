@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Interest {
     private String name;
-    private String category; // e.g., "Hobby", "Skill", "Subject"
+    private String category; 
 
     public Interest(String name, String category) {
         this.name = name;

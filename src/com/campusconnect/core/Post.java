@@ -11,9 +11,9 @@ public class Post implements Storable, Comparable<Post> {
     private String content;
     private List<String> imageUrls;
     private LocalDateTime timestamp;
-    private Set<String> likes; // Set of user IDs who liked
+    private Set<String> likes; 
     private List<Comment> comments;
-    private String privacy; // PUBLIC, FRIENDS, PRIVATE
+    private String privacy; 
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
@@ -28,7 +28,7 @@ public class Post implements Storable, Comparable<Post> {
         this.privacy = "PUBLIC";
     }
 
-    // Getters
+    
     public String getId() {
         return id;
     }
@@ -69,7 +69,7 @@ public class Post implements Storable, Comparable<Post> {
         return comments.size();
     }
 
-    // Setters
+    
     public void setContent(String content) {
         this.content = content;
     }
@@ -82,7 +82,7 @@ public class Post implements Storable, Comparable<Post> {
         this.imageUrls.add(url);
     }
 
-    // Like management
+    
     public void addLike(String userId) {
         likes.add(userId);
     }
@@ -95,7 +95,7 @@ public class Post implements Storable, Comparable<Post> {
         return likes.contains(userId);
     }
 
-    // Comment management
+    
     public void addComment(Comment comment) {
         comments.add(comment);
     }
@@ -106,7 +106,7 @@ public class Post implements Storable, Comparable<Post> {
 
     @Override
     public String toCSV() {
-        // Format: ID,AUTHOR,CONTENT,IMAGES,TIMESTAMP,LIKES,PRIVACY
+        
         String safeContent = content.replace(",", ";").replace("\n", "\\n");
         String imageStr = String.join("|", imageUrls);
         String likeStr = String.join("|", likes);
@@ -138,7 +138,7 @@ public class Post implements Storable, Comparable<Post> {
 
     @Override
     public int compareTo(Post other) {
-        // Newer posts first
+        
         return other.timestamp.compareTo(this.timestamp);
     }
 }

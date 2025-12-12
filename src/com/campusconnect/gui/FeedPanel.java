@@ -19,11 +19,11 @@ public class FeedPanel extends ModernPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Top: Create Post Section
+        
         JPanel createPostPanel = createPostCreationPanel();
         add(createPostPanel, BorderLayout.NORTH);
 
-        // Center: Posts Feed
+        
         postsContainer = new JPanel();
         postsContainer.setLayout(new BoxLayout(postsContainer, BoxLayout.Y_AXIS));
         postsContainer.setOpaque(false);
@@ -46,13 +46,13 @@ public class FeedPanel extends ModernPanel {
                 BorderFactory.createLineBorder(ModernTheme.BORDER, 1),
                 new EmptyBorder(15, 15, 15, 15)));
 
-        // Title
+        
         JLabel titleLabel = new JLabel("What's on your mind?");
         titleLabel.setFont(ModernTheme.FONT_HEADER);
         titleLabel.setForeground(ModernTheme.TEXT_LIGHT);
         panel.add(titleLabel, BorderLayout.NORTH);
 
-        // Text Area
+        
         createPostArea = new JTextArea(3, 40);
         createPostArea.setFont(ModernTheme.FONT_REGULAR);
         createPostArea.setLineWrap(true);
@@ -62,7 +62,7 @@ public class FeedPanel extends ModernPanel {
         createPostArea.setCaretColor(ModernTheme.ACCENT);
         createPostArea.setBorder(new EmptyBorder(8, 8, 8, 8));
 
-        // Character counter
+        
         characterCountLabel = new JLabel("0 / " + MAX_POST_LENGTH);
         characterCountLabel.setFont(ModernTheme.FONT_SMALL);
         characterCountLabel.setForeground(ModernTheme.TEXT_DARK);
@@ -95,7 +95,7 @@ public class FeedPanel extends ModernPanel {
         textScrollPane.setBorder(BorderFactory.createLineBorder(ModernTheme.BORDER));
         panel.add(textScrollPane, BorderLayout.CENTER);
 
-        // Bottom: Post Button and Counter
+        
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setOpaque(false);
         bottomPanel.add(characterCountLabel, BorderLayout.WEST);
@@ -123,14 +123,14 @@ public class FeedPanel extends ModernPanel {
             return;
         }
 
-        // Content moderation
+        
         String moderationError = ContentModerator.checkContent(content);
         if (moderationError != null) {
             JOptionPane.showMessageDialog(this, moderationError, "Content Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Create post
+        
         User currentUser = DataManager.getInstance().getCurrentUser();
         if (currentUser != null) {
             String postId = "P" + System.currentTimeMillis();
@@ -152,7 +152,7 @@ public class FeedPanel extends ModernPanel {
         if (currentUser == null)
             return;
 
-        // Get feed posts (from followed users + own posts)
+        
         List<Post> feedPosts = DataManager.getInstance().getFeedPosts(currentUser.getId());
 
         if (feedPosts.isEmpty()) {
@@ -182,7 +182,7 @@ public class FeedPanel extends ModernPanel {
                 new EmptyBorder(15, 15, 15, 15)));
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 300));
 
-        // Author info
+        
         User author = DataManager.getInstance().getUserById(post.getAuthorId());
         String authorName = author != null ? author.getName() : "Unknown";
 
@@ -202,7 +202,7 @@ public class FeedPanel extends ModernPanel {
 
         card.add(headerPanel, BorderLayout.NORTH);
 
-        // Post content
+        
         JTextArea contentArea = new JTextArea(post.getContent());
         contentArea.setFont(ModernTheme.FONT_REGULAR);
         contentArea.setForeground(ModernTheme.TEXT_LIGHT);
@@ -213,7 +213,7 @@ public class FeedPanel extends ModernPanel {
         contentArea.setBorder(null);
         card.add(contentArea, BorderLayout.CENTER);
 
-        // Actions (Like, Comment)
+        
         JPanel actionsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
         actionsPanel.setOpaque(false);
 
@@ -255,7 +255,7 @@ public class FeedPanel extends ModernPanel {
             post.addLike(currentUser.getId());
             likeButton.setText("❤️ " + post.getLikeCount());
 
-            // Create notification for post author
+            
             if (!post.getAuthorId().equals(currentUser.getId())) {
                 String notifId = "N" + System.currentTimeMillis();
                 Notification notif = new Notification(notifId, post.getAuthorId(), "LIKE",
@@ -276,7 +276,7 @@ public class FeedPanel extends ModernPanel {
                 Comment newComment = new Comment(commentId, post.getId(), currentUser.getId(), comment.trim());
                 DataManager.getInstance().addComment(post.getId(), newComment);
 
-                // Create notification
+                
                 if (!post.getAuthorId().equals(currentUser.getId())) {
                     String notifId = "N" + System.currentTimeMillis();
                     Notification notif = new Notification(notifId, post.getAuthorId(), "COMMENT",

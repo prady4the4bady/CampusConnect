@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
         setSize(900, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setVisible(true); // Show window immediately
+        setVisible(true); 
 
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
@@ -24,14 +24,14 @@ public class MainFrame extends JFrame {
 
         loginPanel = new LoginPanel(this);
         signUpPanel = new SignUpPanel(this);
-        // Dashboard will be initialized after login
+        
 
         mainPanel.add(loginPanel, "LOGIN");
         mainPanel.add(signUpPanel, "SIGNUP");
 
         add(mainPanel);
 
-        // Initialize DataManager and seed in background to avoid blocking UI
+        
         SwingUtilities.invokeLater(() -> {
             DataManager.getInstance();
             com.campusconnect.core.DataSeeder.seed();

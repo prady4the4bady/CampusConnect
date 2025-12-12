@@ -61,13 +61,13 @@ public class ModernButton extends JButton {
 
         int offset = isPressed ? 2 : 0;
 
-        // Draw Shadow
+        
         if (!isPressed) {
             g2.setColor(new Color(0, 0, 0, 50));
             g2.fillRoundRect(2, 2 + offset, getWidth() - 4, getHeight() - 4, 10, 10);
         }
 
-        // Draw Button
+        
         if (isPressed) {
             g2.setColor(pressedColor);
         } else if (isHovered) {
@@ -78,7 +78,7 @@ public class ModernButton extends JButton {
 
         g2.fillRoundRect(0, offset, getWidth(), getHeight() - offset, 10, 10);
 
-        // Draw Text
+        
         FontMetrics fm = g2.getFontMetrics();
         Rectangle stringBounds = fm.getStringBounds(getText(), g2).getBounds();
         int textX = (getWidth() - stringBounds.width) / 2;

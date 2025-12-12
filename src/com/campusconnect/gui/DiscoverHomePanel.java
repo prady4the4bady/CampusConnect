@@ -16,22 +16,22 @@ public class DiscoverHomePanel extends ModernPanel {
         setLayout(new BorderLayout(15, 15));
         setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Header
+        
         JLabel titleLabel = new JLabel("✨ Discover");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
         titleLabel.setForeground(ModernTheme.TEXT_LIGHT);
         add(titleLabel, BorderLayout.NORTH);
 
-        // Main content with grid
+        
         JPanel mainPanel = new JPanel(new GridLayout(2, 1, 15, 15));
         mainPanel.setOpaque(false);
 
-        // Top Row: Stats Cards
+        
         statsPanel = new JPanel(new GridLayout(1, 4, 10, 0));
         statsPanel.setOpaque(false);
         mainPanel.add(statsPanel);
 
-        // Bottom Row: Trending Content
+        
         trendingPanel = new JPanel(new GridLayout(1, 2, 15, 0));
         trendingPanel.setOpaque(false);
         mainPanel.add(trendingPanel);
@@ -49,7 +49,7 @@ public class DiscoverHomePanel extends ModernPanel {
         if (currentUser == null)
             return;
 
-        // Stats Cards
+        
         statsPanel.add(
                 createStatCard("👥", "Followers", String.valueOf(currentUser.getFollowerCount()), ModernTheme.ACCENT));
         statsPanel.add(createStatCard("📝", "Posts",
@@ -61,11 +61,11 @@ public class DiscoverHomePanel extends ModernPanel {
         statsPanel.add(createStatCard("🌐", "Network", String.valueOf(currentUser.getFollowingCount()),
                 new Color(150, 255, 150)));
 
-        // Trending Hashtags
+        
         JPanel hashtagPanel = createTrendingHashtagsPanel();
         trendingPanel.add(hashtagPanel);
 
-        // Active Users
+        
         JPanel activeUsersPanel = createActiveUsersPanel();
         trendingPanel.add(activeUsersPanel);
 
